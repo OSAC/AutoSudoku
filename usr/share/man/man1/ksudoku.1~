@@ -1,0 +1,21 @@
+.TH ksudo 1 "August 2,2012" 
+.SH NAME
+ksudo \- command line program to solve sudoku problem
+.SH SYNOPSIS
+ksudo [inputfile] [outputfile] 
+.SH DESCRIPTION
+ksudoku is used to play or solve any sudoku problem with user input value to the fields or with machine auto solve technique.
+.SS OPTIONS
+.TP
+.B [no arguments]
+allows user to input their sudoku problem so that the application is used to solve the problem.
+.TP
+.B [input_file]
+field to specify the input file where problem is written especially in .txt format.
+.SH AUTHOR
+Kedar Bhandari - Copyright (c) 2012
+.SH BUG REPORT
+Report bugs to ansbhandari@gmail.coom
+.SH URL
+http://www.nourl_of_mine.com
+

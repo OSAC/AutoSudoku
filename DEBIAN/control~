@@ -1,0 +1,11 @@
+Package: Ksudoku-v
+Version: 1.2
+Architecture: i386
+Maintainer: Author <ansbhandari.gmail.com>
+Installed-Size: 578
+Section: admin
+Priority: optional
+Description: Command line sudoku solver
+ A Command line program that solves out automatically or help user to solve any sudoku problem.
+ .
+ The package comes up with command line man/info page that allow user to know about the control functions of the program so that it will be easy to handle all sortcommings in this small program.

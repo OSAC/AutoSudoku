@@ -1,0 +1,43 @@
+.TH ksudo 1 "August 2,2012" 
+.SH NAME
+ksudo \- command line program to solve sudoku problem
+.SH SYNOPSIS
+ksudo [input_file|\-\-input] [output_file] 
+.SH DESCRIPTION
+ksudo is used to play or solve any sudoku problem with user input value to the fields or with machine auto solve technique.
+NOTE : this description assume that you have pre-knowledge about sudoku problem.
+.SS OPTIONS
+ksudo \-\-input .......user input option
+.br
+ksudo input_file ....solve sudoku of given file
+.br
+NOTE: if 2nd argument for output file is given it stores the result in that file in each of above two options.
+.TP
+.B [no_arguments]
+when ksudo is run without an argument it stops reporting that no input file is provided.
+.TP
+.B [input_file]
+field to specify the input file where problem is written.
+NOTE that the probelm is 9*9 seperated each character or value with TAB in each new line and most importantly the empty field in sudoku is marked with 0 (zero) value.
+.TP
+.B [output_file]
+field to specify the output of the solution.NOTE that the output is written in the file only after you solve the problem.If no output file is provided then the result is not saved.
+.SS Control Options
+shift+h.........display this help menu.
+.br
+ctrl+a..........auto complete, program itsesf solves the problem.
+.br
+<space> ........for user input, provides user to input at desired location.
+.br
+ctrl+f..........for force input (at your own risk),provides user force at some extreme position.
+.br
+ctrl+y..........undo (only one time undo after each new step).
+.br
+ctrl+h..........show/hide possible values(default hidden) at respective positions of the fields.
+.SH BUG REPORT
+Report bugs at <ansbhandari@gmail.com>
+.br
+I will be thankful to you for any comments and suggestions!
+.SH URL
+http://sorry!, no url currently.
+
