@@ -68,10 +68,6 @@ sudo1[i][j][k]=sudo[i][j][k];
 //////////////////////////////////////////////////
 void sudoku :: readfile() //reads input sudoku problem from file input.txt
 {
-if(inp==NULL){
-cout<<"Couldn't locate any input file ...Program terminated !!\n"<<endl;
-exit(0);}
-else
 cout<<"  Reading data form file ...";
 for(i=0;i<9;i++)
 for(j=0;j<9;j++){
@@ -462,19 +458,47 @@ sudo[i][j][k]=k;
 cout<<("Input prarsing finished....");
 countfilled();
 }
+//////////////////////////////////////////
+void usage(char *progname){
+	cout<<"Usage\n";
+	cout<<"=====\n";
+	cout<<progname<<" --input         #input puzzle from stdin\n";
+	cout<<progname<<" infile outfile  #puzzle fron \'infile\' and solved output on \'outfile\'\n";
+	cout<<progname<<" -h              #display usage information\n";	
+}
 //////////////////////////////////////////////////////////
 int main(int argc,char *argv[]) //main control
 {
 sudoku s;
-if(argv[1]==NULL)
+if(argv[1]==NULL){
 cout<<"\t-->No input method....**Program Terminated !!\n";
+usage(argv[0]);
+}
 else{
 if(strcmp(argv[1],"--input")==0)//==NULL)
 s.input();
+else if(strcmp(argv[1],"-h")==0){
+	usage(argv[0]);
+	exit(1);
+}
 else{
 s.inp=fopen(argv[1],"r");
+	if(s.inp==NULL){
+		cout<<"infile can't be opened\n\n";
+		usage(argv[0]);
+		exit(1);
+	}
 s.readfile();}
-s.oup=fopen(argv[2],"w");
+if(argv[2]==NULL)
+	s.oup=stdout;
+else
+	s.oup=fopen(argv[2],"w");
+
+if(s.oup==NULL){
+		cout <<"outfile can't be opened\n\n";
+		usage(argv[0]);
+		exit(1);
+	}
 s.eliminate();
 s.solve();}
 return 0;
