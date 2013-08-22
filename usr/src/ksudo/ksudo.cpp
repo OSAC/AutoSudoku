@@ -547,15 +547,13 @@ void usage(char *progname){
 int main(int argc,char *argv[]) //main control
 {
 sudoku s;
+s.oup = stdout;	//default ouput is standard output
 if(argv[1]==NULL){
 cout<<"\t-->No input method....**Default AutoGen Level1 !!\n";
-s.oup = stdout;
 s.auto_gen(1);
-}
-else{
-if(strcmp(argv[1],"--input")==0)//==NULL)
-s.input();
-else if(strcmp(argv[1],"-h")==0){
+} else if(strcmp(argv[1],"--input")==0){
+		s.input();
+}  else if(strcmp(argv[1],"-h")==0){
 	usage(argv[0]);
 	exit(1);
 } else if(strcmp(argv[1],"--auto")==0){
@@ -564,23 +562,20 @@ else if(strcmp(argv[1],"-h")==0){
 		level = atoi(argv[2]);
 	s.auto_gen(level);
 } else {
-s.inp=fopen(argv[1],"r");
+	s.inp=fopen(argv[1],"r");
 	if(s.inp==NULL){
 		cout<<"infile can't be opened\n\n";
 		usage(argv[0]);
 		exit(1);
 	}
-s.readfile();}
-if(argv[2]==NULL)
-	s.oup=stdout;
-else
-	s.oup=fopen(argv[2],"w");
-
-if(s.oup==NULL){
+	if(argv[2]!=NULL)
+		s.oup=fopen(argv[2],"w");
+	if(s.oup==NULL){
 		cout <<"outfile can't be opened\n\n";
 		usage(argv[0]);
 		exit(1);
 	}
+s.readfile();
 }
 s.eliminate();
 s.solve();
