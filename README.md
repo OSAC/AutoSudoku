@@ -12,3 +12,6 @@ simple command line app to solve sudoku problem.
 ./ksudo infile outfile     #puzzle fron 'infile' and solved output on 'outfile'<br/>
 ./ksudo -h                 #display usage information<br/>
 ```
+###Screenshoot
+
+![alt tag](https://raw.github.com/OSAC/AutoSudoku/master/ScreenShoot.png)
