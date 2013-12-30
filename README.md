@@ -3,37 +3,24 @@ AutoSudoku
 
 simple command line app to solve sudoku problem. 
 
+Configuration and Installation
+==============================
 
- OPTIONS
-       ksudo --input .......user input option
-       ksudo input_file ....solve sudoku of given file
-       NOTE:  if 2nd argument for output file is given it stores the result in
-       that file in each of above two options.
+$ make 			# to make the executable file ksudo
+$ make deb		# to create a debian installation package
+$ sudo make install	# to make debian installation package and install
+$ make	clean		# to remove all make
+$ sudo make remove	# to remove installed (ksudoku) package
 
-       [no_arguments]
-              when ksudo is run without an argument it stops reporting that no
-              input file is provided.
+./ksudo -h<br/>
+##Usage
+```bash
+./ksudo --input            #input puzzle from stdin
+./ksudo --auto             #auto generated puzzle with default level
+./ksudo --auto lev	   #auto generated puzzle with level "lev"
+./ksudo infile outfile     #puzzle fron 'infile' and solved output on 'outfile'
+./ksudo -h                 #display usage information
+```
+###Screenshoot
 
-       [input_file]
-              field  to specify the input file where problem is written.  NOTE
-              that the probelm is 9*9 seperated each character or  value  with
-              TAB  in  each  new  line and most importantly the empty field in
-              sudoku is marked with 0 (zero) value.
-
-       [output_file]
-              field to specify the output of the solution.NOTE that the output
-              is  written  in  the file only after you solve the problem.If no
-              output file is provided then the result is not saved.
-
-   Control Options
-       shift+h.........display this help menu.
-       ctrl+a..........auto complete, program itsesf solves the problem.
-       <space> ........for user input, provides user to input at desired loca‐
-       tion.
-       ctrl+f..........for  force input (at your own risk),provides user force
-       at some extreme position.
-       ctrl+y..........undo (only one time undo after each new step).
-       ctrl+h..........show/hide possible values(default hidden) at respective
-       positions of the fields.
-
-see man page for more information.
+![alt tag](https://raw.github.com/OSAC/AutoSudoku/master/ScreenShoot.png)

@@ -5,6 +5,7 @@
 #include<unistd.h>	
 #include<iomanip>
 #include<iostream>
+
 using namespace std;
 int getch() {
 struct termios oldt,newt;
@@ -41,6 +42,7 @@ int issolved();
 void print_line(int pos);
 void print_val(int val,int pos);
 void input();
+void auto_gen(int level);
 int index(int);
 void countfilled();
 void backup();
@@ -68,10 +70,6 @@ sudo1[i][j][k]=sudo[i][j][k];
 //////////////////////////////////////////////////
 void sudoku :: readfile() //reads input sudoku problem from file input.txt
 {
-if(inp==NULL){
-cout<<"Couldn't locate any input file ...Program terminated !!\n"<<endl;
-exit(0);}
-else
 cout<<"  Reading data form file ...";
 for(i=0;i<9;i++)
 for(j=0;j<9;j++){
@@ -161,10 +159,11 @@ cout<<'*';
 cout<<endl;
 }//for i
 }//if
-if(oup!=NULL)
-write();
+
 if(issolved()==1)
- {
+{
+if(oup!=NULL)
+	write();
 cout<<"[Solved] no.of undo = "<<nu;
 cout<<"\nCONGRATULATIONS!\n";
 exit(0);
@@ -462,20 +461,124 @@ sudo[i][j][k]=k;
 cout<<("Input prarsing finished....");
 countfilled();
 }
+//////////////////////////////////////////
+void sudoku :: auto_gen(int level){
+	srand(time(NULL));
+	int row[9][9];
+	int solution[9][9];
+	int puzzle[9][9];
+	int i,j,cur_ran,temp;
+	
+	int defficulty=1+(level%9);/* no of space to made blank*/
+	
+	for(i=0;i<9;i++)
+		{
+			cur_ran = 1+(rand()%9);
+			for(j=0;j<i;j++)
+				if(row[0][j] == cur_ran){
+					i--;
+					break;
+				}
+				if(j==i)
+					row[0][i]=cur_ran;
+		}
+	for(i=0;i<9;i++){
+		row[1][i] = row[0][(i+3)%9];
+		row[2][i] = row[0][(i+6)%9];
+	}
+	
+	for(i=0;i<9;i++){
+		row[3][i] = row[0][i];
+		row[6][i] = row[0][i];
+	}
+	for(i=0;i<9;){
+		for(j=0;j<3;j++){
+			row[3][i+j] = row[0][i+(j+1)%3];
+			row[6][i+j] = row[0][i+(j+2)%3];
+		}
+	i+=3;	
+	}
+	for(i=0;i<9;i++){
+		row[4][i] = row[3][(i+3)%9];
+		row[5][i] = row[3][(i+6)%9];
+		
+	
+		row[7][i] = row[6][(i+3)%9];
+		row[8][i] = row[6][(i+6)%9];
+	}
+	
+	
+	for(i=0;i<9;i++)
+		for(j=0;j<9;j++)
+			solution[i][j] = row[i][j];
+		
+
+for(i=0;i<9;i++)
+	for(j=0;j<9;j++)
+		puzzle[i][j]=solution[i][j];
+
+for(i=0;i<9;i++)
+	for(j=0;j<defficulty;j++)
+			puzzle[i][(rand()%9)] = 0;
+
+for(int i=0;i<9 ;i++)
+	for(int j=0;j<9;j++)
+		{
+		sudo[i][j][0]= puzzle[i][j];
+		if(sudo[i][j][0]==0)
+			for(int k=1;k<=9;k++)
+				sudo[i][j][k]=k;
+		}
+
+cout<<("Input prarsing finished....");
+countfilled();
+}
+//////////////////////////////////////////
+void usage(char *progname){
+	cout<<"Usage\n";
+	cout<<"=====\n";
+	cout<<progname<<" --input         #input puzzle from stdin\n";
+	cout<<progname<<" --auto          #auto generated puzzle with default level\n";	
+	cout<<progname<<" --auto lev	  #auto generated puzzle with level \"lev\"\n";	
+	cout<<progname<<" infile outfile  #puzzle fron \'infile\' and solved output on \'outfile\'\n";
+	cout<<progname<<" -h              #display usage information\n";	
+	
+}
 //////////////////////////////////////////////////////////
 int main(int argc,char *argv[]) //main control
 {
 sudoku s;
-if(argv[1]==NULL)
-cout<<"\t-->No input method....**Program Terminated !!\n";
-else{
-if(strcmp(argv[1],"--input")==0)//==NULL)
-s.input();
-else{
-s.inp=fopen(argv[1],"r");
-s.readfile();}
-s.oup=fopen(argv[2],"w");
+s.oup = stdout;	//default ouput is standard output
+if(argv[1]==NULL){
+cout<<"\t-->No input method....**Default AutoGen Level1 !!\n";
+s.auto_gen(1);
+} else if(strcmp(argv[1],"--input")==0){
+		s.input();
+}  else if(strcmp(argv[1],"-h")==0){
+	usage(argv[0]);
+	exit(1);
+} else if(strcmp(argv[1],"--auto")==0){
+	int level=1;
+	if(argv[2]!=NULL)
+		level = atoi(argv[2]);
+	s.auto_gen(level);
+} else {
+	s.inp=fopen(argv[1],"r");
+	if(s.inp==NULL){
+		cout<<"infile can't be opened\n\n";
+		usage(argv[0]);
+		exit(1);
+	}
+	if(argv[2]!=NULL)
+		s.oup=fopen(argv[2],"w");
+	if(s.oup==NULL){
+		cout <<"outfile can't be opened\n\n";
+		usage(argv[0]);
+		exit(1);
+	}
+s.readfile();
+}
 s.eliminate();
-s.solve();}
+s.solve();
 return 0;
 }

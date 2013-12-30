@@ -1,7 +1,7 @@
-Package: Ksudoku-v
+Package: Ksudoku
 Version: 1.2
 Architecture: i386
-Maintainer: Author <ansbhandari.gmail.com>
+Maintainer: Author <ansbhandari@gmail.com>
 Installed-Size: 578
 Section: admin
 Priority: optional
