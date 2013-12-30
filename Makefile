@@ -1,10 +1,6 @@
 ksudo: 
 	g++ -o ./usr/bin/ksudo ./usr/src/ksudo/ksudo.cpp
-<<<<<<< HEAD
 	ln -s ./usr/bin/ksudo ./ksudo
-=======
-	cp ./usr/bin/ksudo .
->>>>>>> 5cb29f5b813ad3794e7df52461d67bb44ad39666
 clean:
 	rm ./usr/bin/ksudo
 	rm ./ksudo
