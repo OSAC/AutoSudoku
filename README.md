@@ -5,11 +5,11 @@ simple command line app to solve sudoku problem.
 ==========
 ##Configuration and Installation<br/>
 ```bash
-$ make 		      	      # to make the executable file ksudo
-$ make deb		          # to create a debian installation package
-$ sudo make install	    # to make debian installation package and install
-$ make	clean	    	    # to remove all make
-$ sudo make remove	    # to remove installed (ksudoku) package
+$ make 		      	     # to make the executable file ksudo
+$ make deb		         # to create a debian installation package
+$ sudo make install	   # to make debian installation package and install
+$ make	clean	    	   # to remove all make
+$ sudo make remove	   # to remove installed (ksudoku) package
 ```
 ##Usage Help
 ```bash
